@@ -19,7 +19,7 @@ function onInputChange(evt) {
   fetchCountries(inputValue)
     .then(data => {
       if (data.status === 404) {
-        throw new Error('Oops, there is no country with that name');
+        throw new Error(data.status);
       }
       if (data.length > 10) {
         // clearCountryList();
@@ -40,7 +40,7 @@ function onInputChange(evt) {
       console.log(data);
     })
     .catch(
-      error => Notiflix.Notify.failure(error),
+      () => Notiflix.Notify.failure('Oops, there is no country with that name'),
       clearCountryList(),
       clearCountryInfo()
     );
